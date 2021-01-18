@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,14 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule ,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('token name'),
+        allowedDomains: ['example.com'],
+        disallowedRoutes: ['http://example.com/examplebadroute/'],
+      },
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
